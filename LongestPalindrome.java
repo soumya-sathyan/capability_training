@@ -4,7 +4,9 @@ import java.util.Map;
 public class LongestPalindrome {
 
 	public static void main(String[] args) {
-		String actulString ="aaaaasssBBcccccbbtkkknnn";
+		//String actulString ="aaaaasssBBcccccbbtkkknnn";
+		//String actulString ="aallkkkkk";
+		String actulString="XXYYZZ";
 		String str=actulString.toLowerCase();
 		Map<Character,Integer> charsCountMap=new HashMap<Character,Integer>();
 		String startingStr = "", centerString = "", endingStr = ""; 
@@ -21,17 +23,20 @@ public class LongestPalindrome {
 		
 		for (Map.Entry<Character, Integer> mapEntry : charsCountMap.entrySet()) {
 			
-			if(!(mapEntry.getKey().equals(ch))) {
-				for (int i = 0; i < mapEntry.getValue() / 2; i++) {
-					startingStr += mapEntry.getKey();
-				}
+			int len = mapEntry.getValue() / 2;
+			
+			if(mapEntry.getKey().equals(ch)) {
+				len = (mapEntry.getValue()-1) / 2;
+			}
+			for (int i = 0; i < len; i++) {
+				startingStr += mapEntry.getKey();
 			}
 
 		}
 	       
 	        endingStr = reverseString(startingStr); 
-	        int len = (startingStr+centerString+endingStr).length();
-	        System.out.println("Largest Palindrom="+startingStr+centerString+endingStr);
+	        int len = (startingStr+centerString.trim()+endingStr).length();
+	        System.out.println("Largest Palindrom="+startingStr+centerString.trim()+endingStr);
 	        System.out.println("Length of largest Palindrome="+len);
 
 	}
